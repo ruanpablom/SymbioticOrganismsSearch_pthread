@@ -1137,9 +1137,9 @@ void commensalism_phase(int index_i, double **pop_th, double *best_th, double *f
 	//puts values for array_rand and new_x_i
 	for(i=0;i<DIM;i++){
 		array_rand[i]=randon(-1,1);
-		//pthread_mutex_lock(&data_mutex);
+		pthread_mutex_lock(&data_mutex);
                 new_x_i[i]=pop_th[index_i][i]+(array_rand[i]*(best_th[i]-pop_th[index_j][i]));
-		//pthread_mutex_unlock(&data_mutex);
+		pthread_mutex_unlock(&data_mutex);
                 if(FUNCTION!=10 && FUNCTION!=11 && FUNCTION!=12 && FUNCTION!=13 && FUNCTION!=14){
 			if(new_x_i[i]<l[0])new_x_i[i]=l[0];
 			if(new_x_i[i]>u[0])new_x_i[i]=u[0];
@@ -1155,13 +1155,13 @@ void commensalism_phase(int index_i, double **pop_th, double *best_th, double *f
 	
 	if(fo_th[index_i]>=newfo_i){////greedy selection for xi
 		for(i=0;i<DIM;i++){
-			//pthread_mutex_lock(&data_mutex);
+			pthread_mutex_lock(&data_mutex);
                         pop_th[index_i][i]=new_x_i[i];
-		        //pthread_mutex_unlock(&data_mutex);
+		        pthread_mutex_unlock(&data_mutex);
                 }
-			//pthread_mutex_lock(&data_mutex);
+			pthread_mutex_lock(&data_mutex);
                         fo_th[index_i]=newfo_i;
-	                //pthread_mutex_unlock(&data_mutex);                
+	                pthread_mutex_unlock(&data_mutex);                
         }
 
 	free(array_rand);
@@ -1184,9 +1184,9 @@ void parasitism_phase(int index_i, double **pop_th, double *fo_th){
 
 	
 	for(i=0;i<DIM;i++){//copies xi for parasite
-            //pthread_mutex_lock(&data_mutex);		
+            pthread_mutex_lock(&data_mutex);		
             parasite[i]=pop_th[index_i][i];
-	    //pthread_mutex_unlock(&data_mutex);
+	    pthread_mutex_unlock(&data_mutex);
         }
 	
 
@@ -1203,13 +1203,13 @@ void parasitism_phase(int index_i, double **pop_th, double *fo_th){
 	
 	if(fo_th[index_j]>=parasite_fo){//greedy selection between xj and parasite
 		for(i=0;i<DIM;i++){
-		    //pthread_mutex_lock(&data_mutex);	
+		    pthread_mutex_lock(&data_mutex);	
                     pop_th[index_j][i]=parasite[i];
-		    //pthread_mutex_unlock(&data_mutex);
+		    pthread_mutex_unlock(&data_mutex);
                 }
-		//pthread_mutex_lock(&data_mutex); 
+		pthread_mutex_lock(&data_mutex); 
                 fo_th[index_j]=parasite_fo;
-		//pthread_mutex_unlock(&data_mutex);		
+		pthread_mutex_unlock(&data_mutex);		
         }
 	free(parasite);	
 }
