@@ -7,7 +7,6 @@ typedef struct{
 	int fim;
 }slice;
 
-
 /* Control Parameters of the search algorithm*/
 int POP_SIZE;  /* The number of candidate solutions*/
 int MAX_ITER; /*The number of iterations*/
@@ -55,6 +54,6 @@ int ffscanf(char *fieldname, FILE *fp, char *format, void *inbuffer);
 void sos_iter();
 void alloc_slice_pointers();
 void free_slice();
-void showConst(double *var, int r, FILE *file);
+void showConst(double *var, int r);
 
 #endif

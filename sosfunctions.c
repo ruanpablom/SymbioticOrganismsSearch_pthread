@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -847,7 +846,7 @@ void *th_sos(void* argThread){
 	}
 }
 
-void showConst(double *var, int r, FILE *file){
+void showConst(double *var, int r){
 	int i;
 	if(COND){
 		if(constr(best,1)==0)var[r]=bestfo;
@@ -856,20 +855,11 @@ void showConst(double *var, int r, FILE *file){
 		
 		switch(FUNCTION){
 			case 9: //Cantilever Beam
-				fprintf(file,"g1=%g ",c_f[0]);
-				if(c_f[0]>1) fprintf(file, "Fail\n");
-				else fprintf(file, "Ok\n");
 				printf("g1=%g ",c_f[0]);
 				if(c_f[0]>1)printf("Fail\n");
 				else printf("Ok\n");
 				break;
 			case 10: //I-Beam vertical deflection 
-				fprintf(file, "g1=%g ",c_f[0]);
-				if(c_f[0]>300) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file, "g2=%g ",c_f[1]);
-				if(c_f[1]>56) fprintf(file, "Fail\n");
-				else fprintf(file, "Ok\n");
 				printf("g1=%g ",c_f[0]);
 				if(c_f[0]>300) printf("Fail ");
 				else printf("Ok ");
@@ -878,27 +868,6 @@ void showConst(double *var, int r, FILE *file){
 				else printf("Ok\n");
 				break;
 			case 11: //Welded Beam 
-				fprintf(file,"g1=%g ",c_f[0]);fprintf(file,"g1=%g ",c_f[0]);
-				if(c_f[0]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g2=%g ",c_f[1]);
-				if(c_f[1]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g3=%g ",c_f[2]);
-				if(c_f[2]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g4=%g ",c_f[3]);
-				if(c_f[3]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g5=%g ",c_f[4]);
-				if(c_f[4]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g6=%g ",c_f[5]);
-				if(c_f[5]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g7=%g ",c_f[6]);
-				if(c_f[6]>0) fprintf(file, "Fail\n");
-				else fprintf(file, "Ok\n");
 				printf("g1=%g ",c_f[0]);
 				if(c_f[0]>0) printf("Fail ");
 				else printf("Ok ");
@@ -922,18 +891,6 @@ void showConst(double *var, int r, FILE *file){
 				else printf("Ok\n");
 				break;
 			case 12: //Pressure Vessel 
-				fprintf(file,"g1=%g ",c_f[0]);
-				if(c_f[0]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g2=%g ",c_f[1]);
-				if(c_f[1]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g3=%g ",c_f[2]);
-				if(c_f[2]>0) fprintf(file, "Fail ");
-				else fprintf(file, "Ok ");
-				fprintf(file,"g4=%g ",c_f[3]);
-				if(c_f[3]>0) fprintf(file, "Fail\n");
-				else fprintf(file, "Ok\n");
 				printf("g1=%g ",c_f[0]);
 				if(c_f[0]>0) printf("Fail ");
 				else printf("Ok ");
@@ -948,11 +905,9 @@ void showConst(double *var, int r, FILE *file){
 				else printf("Ok\n");
 				break;
 			case 13: //Tension/compression string
-				fprintf(file,"g1=%g g2=%g g3=%g g4=%g\n",c_f[0],c_f[1],c_f[3],c_f[3]);
 				printf("g1=%g g2=%g g3=%g g4=%g\n",c_f[0],c_f[1],c_f[3],c_f[3]);
 				break;
 			case 14: //Speed Reducer(Gear Train)
-				fprintf(file,"g1=%g g2=%g g3=%g g4=%g g5=%g g6=%g g7=%g g8=%g g9=%g g10=%g g11=%g\n",c_f[0],c_f[1],c_f[3],c_f[3],c_f[4],c_f[5],c_f[6],c_f[7],c_f[8],c_f[9],c_f[10]);
 				printf("g1=%g g2=%g g3=%g g4=%g g5=%g g6=%g g7=%g g8=%g g9=%g g10=%g g11=%g\n",c_f[0],c_f[1],c_f[3],c_f[3],c_f[4],c_f[5],c_f[6],c_f[7],c_f[8],c_f[9],c_f[10]);
 				break;
 			case 15: //10-Bar-Truss
@@ -971,22 +926,6 @@ void showConst(double *var, int r, FILE *file){
 					printf("g(%i)=%g ",i+1,c_f[i]);
 				}
 				printf("\n");
-
-				fprintf(file,"Stress Violation: ");
-				for(i=0;i<10;i++){
-					fprintf(file,"g(%i)=%g ",i+1, c_f[i]);
-				}
-				fprintf(file,"\n");
-				fprintf(file,"DispX: ");
-				for(i=10;i<16;i++){
-					fprintf(file,"g(%i)=%g ",i+1, c_f[i]);
-				}
-				fprintf(file,"\n");
-				fprintf(file,"DispY: ");
-				for(i=16;i<22;i++){
-					fprintf(file,"g(%i)=%g ",i+1,c_f[i]);
-				}
-				fprintf(file,"\n");
 				break;
 		}
 	}
