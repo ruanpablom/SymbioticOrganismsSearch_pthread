@@ -1,8 +1,8 @@
 ====================
 Runs: 100
-Best Fo: 4676.95
+Best Fo: 4676.94
 Avg: 4677.2
-StdDev: 0.407458
+StdDev: 0.504669
 Feasible: 78
-Avg Time: 0.751s
+Avg Time: 2.425s
 ====================
