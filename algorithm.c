@@ -32,15 +32,16 @@ int main(int argc, char **argv){
     double *mediaBfo;
     double *mediaM;
     struct timeval t1, t2;
-    double elapsedTime,total=0;
-    
+    double elapsedTime,total=0;    
+    char str[16];
     srand(time(NULL));
 
     if (GetParameters(argv) == -1){	//read input file
         return 0;
     }
+    str[11] = CORES;
     showParameters(FUNCTION, RUN, MAX_ITER, POP_SIZE, DIM);
-
+    
     switch(FUNCTION){
         case 9:
             rest=1;
@@ -144,6 +145,27 @@ int main(int argc, char **argv){
        }
     }
     int nfeasible = AvgStdDev(&avg,&stdDev,var);
+    sprintf(str,"experimento%d.txt",CORES);
+    FILE *file = fopen(str,"w");
+    if(file == 0){
+        printf("ERRO\n");
+        return -1;
+    }
+     
+    fprintf(file,"====================\n");
+    fprintf(file,"Runs: %d\n",RUN);
+    fprintf(file,"Best Fo: ");
+    fprintf(file,"%g\n",bestfoRUN);
+    fprintf(file,"Avg: ");
+    fprintf(file,"%g\n",avg);
+    fprintf(file,"StdDev: ");
+    fprintf(file,"%g\n",stdDev);
+    fprintf(file,"Feasible: ");
+    fprintf(file,"%i\n",nfeasible);
+    fprintf(file,"Avg Time: %.3lfs\n",total/RUN);
+    fprintf(file,"====================\n");
+     
+    fclose(file);
     printf("====================\n");
     printf("Best Fo: ");
     printf("%g\n",bestfoRUN);
